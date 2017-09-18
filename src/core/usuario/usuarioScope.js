@@ -2,12 +2,7 @@ const validate = require('../../helpers/validate');
 
 module.exports = {
     login,
-    signup,
-    // recoverPassword,
-    // recoverPasswordConfirm,
-    //
-    // selectTvshow,
-    // markEpisodeAsWatched
+    cadastrar
 };
 
 async function login(params) {
@@ -32,7 +27,7 @@ async function login(params) {
     }
 }
 
-async function signup(params) {
+async function cadastrar(params) {
     const validation = {
         nome: {
             required: true,
@@ -67,78 +62,3 @@ async function signup(params) {
         throw error;
     }
 }
-
-// async function recoverPassword(params) {
-//     const validation = {
-//         email: {
-//             required: true,
-//             string: true,
-//             maxLength: 255
-//         }
-//     };
-//
-//     await validate(params, validation);
-// }
-//
-// async function recoverPasswordConfirm(params) {
-//     const validation = {
-//         password: {
-//             required: true,
-//             string: true,
-//             maxLength: 60
-//         },
-//         confirmPassword: {
-//             required: true,
-//             string: true,
-//             maxLength: 60
-//         }
-//     };
-//
-//     await validate(params, validation);
-// }
-//
-// async function selectTvshow(params) {
-//     const validation = {
-//         type: {
-//             required: true,
-//             string: true
-//         },
-//         search: {
-//             string: true,
-//             maxLength: 200
-//         },
-//         orderBy: {
-//             string: true
-//         },
-//         genres: {
-//             array: {
-//                 string: true
-//             }
-//         },
-//         showArchived: {
-//             boolean: true
-//         },
-//         unless: {
-//             array: {
-//                 string: true
-//             }
-//         }
-//     };
-//
-//     await validate(params, validation);
-// }
-//
-// async function markEpisodeAsWatched(params) {
-//     const validation = {
-//         tvshowId: {
-//             required: true,
-//             string: true
-//         },
-//         id: {
-//             required: true,
-//             string: true
-//         }
-//     };
-//
-//     await validate(params, validation);
-// }

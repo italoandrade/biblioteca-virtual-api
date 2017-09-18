@@ -5,9 +5,9 @@ function asyncWrap(fn, config) {
         if (config && config.public)
             return fn(req, res, next).catch(next);
 
-        if (await token(req, res))
+        if (await token(req, res, config))
             fn(req, res, next).catch(next);
-    };
+    }
 }
 
 global.asyncWrap = asyncWrap;

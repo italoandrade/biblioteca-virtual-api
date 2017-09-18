@@ -1,17 +1,17 @@
-const repository = require('./clientRepository');
-const scope = require('./clientScope');
+const repository = require('./editoraRepository');
+const scope = require('./editoraScope');
 
 const colorize = require('../../helpers/colorize');
 
 module.exports = {
-    select,
-    selectById,
-    insert,
-    update,
-    deletee
+    selecionar,
+    selecionarPorId,
+    inserir,
+    atualizar,
+    remover
 };
 
-async function select(req, res) {
+async function selecionar(req, res) {
     const params = {
         search: req.query.search,
         page: req.query.page,
@@ -28,7 +28,7 @@ async function select(req, res) {
     }
 
     try {
-        await scope.select(params);
+        await scope.selecionar(params);
     } catch (err) {
         return res.finish({
             httpCode: 400,
@@ -37,7 +37,7 @@ async function select(req, res) {
     }
 
     try {
-        let data = await repository.select(params);
+        let data = await repository.selecionar(params);
 
         let lineCount = 0;
 
@@ -62,13 +62,13 @@ async function select(req, res) {
     }
 }
 
-async function selectById(req, res) {
+async function selecionarPorId(req, res) {
     const params = {
         id: req.params.id
     };
 
     try {
-        await scope.selectById(params);
+        await scope.selecionarPorId(params);
     } catch (err) {
         return res.finish({
             httpCode: 400,
@@ -77,7 +77,7 @@ async function selectById(req, res) {
     }
 
     try {
-        let data = await repository.selectById(params);
+        let data = await repository.selecionarPorId(params);
 
         if (!data.length) {
             return res.finish({
@@ -103,26 +103,14 @@ async function selectById(req, res) {
     }
 }
 
-async function insert(req, res) {
+async function inserir(req, res) {
     const params = {
-        userId: req.token.id,
-        typeId: req.body.typeId,
-        name: req.body.name,
-        contactName: req.body.contactName,
-        razaoSocial: req.body.razaoSocial,
-        cnpj: req.body.cnpj,
-        inscricaoEstadual: req.body.inscricaoEstadual,
-        address: req.body.address,
-        recurringOrder: req.body.recurringOrder,
-        recurringDate: req.body.recurringDate,
-        typeRecurringId: req.body.typeRecurringId,
-        regionId: req.body.regionId,
-        phones: req.body.phones ? JSON.stringify(req.body.phones) : null,
-        emails: req.body.emails ? JSON.stringify(req.body.emails) : null
+        idUsuario: req.token.id,
+        nome: req.body.nome
     };
 
     try {
-        await scope.insert(params);
+        await scope.inserir(params);
     } catch (err) {
         return res.finish({
             httpCode: 400,
@@ -131,7 +119,7 @@ async function insert(req, res) {
     }
 
     try {
-        let data = await repository.insert(params);
+        let data = await repository.inserir(params);
 
         let httpCode = 200;
         let error;
@@ -159,27 +147,15 @@ async function insert(req, res) {
     }
 }
 
-async function update(req, res) {
+async function atualizar(req, res) {
     const params = {
-        userId: req.token.id,
+        idUsuario: req.token.id,
         id: req.params.id,
-        typeId: req.body.typeId,
-        name: req.body.name,
-        contactName: req.body.contactName,
-        razaoSocial: req.body.razaoSocial,
-        cnpj: req.body.cnpj,
-        inscricaoEstadual: req.body.inscricaoEstadual,
-        address: req.body.address,
-        recurringOrder: req.body.recurringOrder,
-        recurringDate: req.body.recurringDate,
-        typeRecurringId: req.body.typeRecurringId,
-        regionId: req.body.regionId,
-        phones: req.body.phones ? JSON.stringify(req.body.phones) : null,
-        emails: req.body.emails ? JSON.stringify(req.body.emails) : null
+        nome: req.body.nome
     };
 
     try {
-        await scope.update(params);
+        await scope.atualizar(params);
     } catch (err) {
         return res.finish({
             httpCode: 400,
@@ -188,7 +164,7 @@ async function update(req, res) {
     }
 
     try {
-        let data = await repository.update(params);
+        let data = await repository.atualizar(params);
 
         let httpCode = 200;
         let error;
@@ -222,13 +198,13 @@ async function update(req, res) {
     }
 }
 
-async function deletee(req, res) {
+async function remover(req, res) {
     const params = {
         id: req.params.id
     };
 
     try {
-        await scope.deletee(params);
+        await scope.remover(params);
     } catch (err) {
         return res.finish({
             httpCode: 400,
@@ -237,7 +213,7 @@ async function deletee(req, res) {
     }
 
     try {
-        let data = await repository.deletee(params);
+        let data = await repository.remover(params);
 
         let httpCode = 200;
         let error;

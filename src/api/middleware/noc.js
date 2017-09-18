@@ -37,10 +37,10 @@ exports.end = function (req, res, next) {
     req.log.errorCode = res.errorCode || 0;
     req.log.description = res.description;
 
-    // if (!global.config.isProduction) console.log(req.log);
+    if (!global.config.isProduction) console.log(req.log);
 
-    delete req.log.body.password;
-    delete req.log.body.confirmPassword;
+    delete req.log.body.senha;
+    delete req.log.body.confirmarSenha;
 
     noc(req.log);
 
@@ -48,5 +48,5 @@ exports.end = function (req, res, next) {
 };
 
 function noc(log) {
-    console.log(log);
+    // console.log(log);
 }
