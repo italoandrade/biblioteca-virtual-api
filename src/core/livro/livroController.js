@@ -1,9 +1,9 @@
-const repository = require('./editoraRepository');
-const scope = require('./editoraScope');
+const repository = require('./livroRepository');
+const scope = require('./livroScope');
+const service = require('./livroService');
 
 module.exports = {
     selecionar,
-    selecionarSimples,
     selecionarPorId,
     inserir,
     atualizar,
@@ -60,26 +60,9 @@ async function selecionar(req, res) {
     }
 }
 
-async function selecionarSimples(req, res) {
-    try {
-        let data = await repository.selecionarSimples();
-
-        return res.finish({
-            httpCode: 200,
-            content: {
-                data
-            }
-        });
-    } catch (error) {
-        return res.finish({
-            httpCode: 500,
-            error
-        });
-    }
-}
-
 async function selecionarPorId(req, res) {
     const params = {
+        s3bucket: global.config.aws.s3bucket,
         id: req.params.id
     };
 
@@ -100,7 +83,7 @@ async function selecionarPorId(req, res) {
                 httpCode: 404,
                 error: {
                     executionCode: 1,
-                    message: 'Editora não encontrada'
+                    message: 'Livro não encontrado'
                 }
             });
         }
@@ -122,7 +105,12 @@ async function selecionarPorId(req, res) {
 async function inserir(req, res) {
     const params = {
         idUsuario: req.token.id,
-        nome: req.body.nome
+        imagem: req.body.imagem,
+        titulo: req.body.titulo,
+        idAutor: req.body.idAutor,
+        idEditora: req.body.idEditora,
+        sinopse: req.body.sinopse,
+        novaImagem: req.body.novaImagem
     };
 
     try {
@@ -148,6 +136,11 @@ async function inserir(req, res) {
                 break;
             default:
                 content = data.content;
+
+                if (params.novaImagem) {
+                    params.id = content.id;
+                    await service.uploadImagem(params);
+                }
         }
 
         return res.finish({
@@ -157,7 +150,7 @@ async function inserir(req, res) {
         });
     } catch (error) {
         return res.finish({
-            httpCode: 500,
+            httpCode: error.httpCode || 500,
             error
         });
     }
@@ -167,7 +160,12 @@ async function atualizar(req, res) {
     const params = {
         idUsuario: req.token.id,
         id: req.params.id,
-        nome: req.body.nome
+        imagem: req.body.imagem,
+        titulo: req.body.titulo,
+        idAutor: req.body.idAutor,
+        idEditora: req.body.idEditora,
+        sinopse: req.body.sinopse,
+        novaImagem: req.body.novaImagem
     };
 
     try {
@@ -192,13 +190,18 @@ async function atualizar(req, res) {
                 error = data;
                 break;
             case 2:
+            case 3:
                 httpCode = 409;
                 error = data;
                 break;
             default:
                 content = {
-                    message: 'Editora alterada com sucesso'
+                    message: 'Livro alterado com sucesso'
                 };
+
+                if (params.novaImagem) {
+                    await service.uploadImagem(params);
+                }
         }
 
         return res.finish({
@@ -241,12 +244,12 @@ async function remover(req, res) {
                 error = data;
                 break;
             case 2:
-                httpCode = 404;
+                httpCode = 409;
                 error = data;
                 break;
             default:
                 content = {
-                    message: 'Editora excluída com sucesso'
+                    message: 'Livro excluído com sucesso'
                 };
         }
 

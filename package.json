@@ -11,8 +11,10 @@
     "body-parser": "^1.17.2",
     "consign": "^0.1.6",
     "express": "^4.15.4",
+    "md5": "^2.2.1",
     "nodemailer": "^2.7.2",
     "pg-promise": "^5.9.7",
-    "promise": "^7.3.1"
+    "promise": "^7.3.1",
+    "s3fs": "^2.5.0"
   }
 }

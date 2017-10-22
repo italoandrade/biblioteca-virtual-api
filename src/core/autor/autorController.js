@@ -1,5 +1,5 @@
-const repository = require('./editoraRepository');
-const scope = require('./editoraScope');
+const repository = require('./autorRepository');
+const scope = require('./autorScope');
 
 module.exports = {
     selecionar,
@@ -100,7 +100,7 @@ async function selecionarPorId(req, res) {
                 httpCode: 404,
                 error: {
                     executionCode: 1,
-                    message: 'Editora não encontrada'
+                    message: 'Autor não encontrado'
                 }
             });
         }
@@ -197,7 +197,7 @@ async function atualizar(req, res) {
                 break;
             default:
                 content = {
-                    message: 'Editora alterada com sucesso'
+                    message: 'Autor alterado com sucesso'
                 };
         }
 
@@ -246,7 +246,7 @@ async function remover(req, res) {
                 break;
             default:
                 content = {
-                    message: 'Editora excluída com sucesso'
+                    message: 'Autor excluído com sucesso'
                 };
         }
 

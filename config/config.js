@@ -16,6 +16,11 @@ const config = {
     },
     secret: {
         key: process.env.SECRET_KEY || 'bivi'
+    },
+    aws: {
+        accessKeyId: process.env.ACCESS_KEY_ID,
+        secretAccessKey: process.env.SECRET_ACCESS_KEY,
+        s3bucket: 'https://s3.amazonaws.com/biblioteca-virtual/'
     }
 };
 

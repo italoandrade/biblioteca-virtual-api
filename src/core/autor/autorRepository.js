@@ -10,7 +10,7 @@ module.exports = {
 };
 
 async function selecionar(params) {
-    return db.func('Biblioteca.SelecionarEditora', [
+    return db.func('Biblioteca.SelecionarAutor', [
         params.search,
         params.page,
         params.lines,
@@ -19,24 +19,24 @@ async function selecionar(params) {
 }
 
 async function selecionarSimples() {
-    return db.func('Biblioteca.SelecionarEditoraSimples');
+    return db.func('Biblioteca.SelecionarAutorSimples');
 }
 
 async function selecionarPorId(params) {
-    return db.func('Biblioteca.SelecionarEditoraPorId', [
+    return db.func('Biblioteca.SelecionarAutorPorId', [
         params.id
     ]);
 }
 
 async function inserir(params) {
-    return db.json('Biblioteca.InserirEditora', [
+    return db.json('Biblioteca.InserirAutor', [
         params.idUsuario,
         params.nome
     ]);
 }
 
 async function atualizar(params) {
-    return db.json('Biblioteca.AtualizarEditora', [
+    return db.json('Biblioteca.AtualizarAutor', [
         params.idUsuario,
         params.id,
         params.nome
@@ -44,7 +44,7 @@ async function atualizar(params) {
 }
 
 async function remover(params) {
-    return db.json('Biblioteca.RemoverEditora', [
+    return db.json('Biblioteca.RemoverAutor', [
         params.id
     ]);
 }
