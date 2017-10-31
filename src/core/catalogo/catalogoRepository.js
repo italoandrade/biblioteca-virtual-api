@@ -2,7 +2,7 @@ const db = global.db;
 
 module.exports = {
     selecionar,
-    efetuarEmprestimo
+    efetuarReserva
 };
 
 async function selecionar(params) {
@@ -15,8 +15,8 @@ async function selecionar(params) {
     ]);
 }
 
-async function efetuarEmprestimo(params) {
-    return db.json('Biblioteca.EfetuarEmprestimoLivro', [
+async function efetuarReserva(params) {
+    return db.json('Biblioteca.EfetuarReservaLivro', [
         params.idUsuario,
         params.id
     ]);

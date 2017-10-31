@@ -16,7 +16,8 @@ async function selecionar(params) {
         params.lines,
         params.orderTitulo,
         params.orderNomeAutor,
-        params.orderNomeEditora
+        params.orderNomeEditora,
+        params.orderEstoque
     ]);
 }
 
@@ -34,7 +35,8 @@ async function inserir(params) {
         params.titulo,
         params.idAutor,
         params.idEditora,
-        params.sinopse
+        params.sinopse,
+        params.estoque
     ]);
 }
 
@@ -46,7 +48,8 @@ async function atualizar(params) {
         params.titulo,
         params.idAutor,
         params.idEditora,
-        params.sinopse
+        params.sinopse,
+        params.estoque
     ]);
 }
 

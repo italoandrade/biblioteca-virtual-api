@@ -110,7 +110,8 @@ async function inserir(req, res) {
         idAutor: req.body.idAutor,
         idEditora: req.body.idEditora,
         sinopse: req.body.sinopse,
-        novaImagem: req.body.novaImagem
+        novaImagem: req.body.novaImagem,
+        estoque: req.body.estoque
     };
 
     try {
@@ -165,7 +166,8 @@ async function atualizar(req, res) {
         idAutor: req.body.idAutor,
         idEditora: req.body.idEditora,
         sinopse: req.body.sinopse,
-        novaImagem: req.body.novaImagem
+        novaImagem: req.body.novaImagem,
+        estoque: req.body.estoque
     };
 
     try {

@@ -3,7 +3,7 @@ const scope = require('./catalogoScope');
 
 module.exports = {
     selecionar,
-    efetuarEmprestimo
+    efetuarReserva
 };
 
 async function selecionar(req, res) {
@@ -41,14 +41,14 @@ async function selecionar(req, res) {
     }
 }
 
-async function efetuarEmprestimo(req, res) {
+async function efetuarReserva(req, res) {
     const params = {
         idUsuario: req.token.id,
         id: req.params.id
     };
 
     try {
-        let data = await repository.efetuarEmprestimo(params);
+        let data = await repository.efetuarReserva(params);
 
         let httpCode = 200;
         let error;
@@ -61,7 +61,7 @@ async function efetuarEmprestimo(req, res) {
                 break;
             default:
                 content = {
-                    message: 'Empréstimo efetuado com sucesso'
+                    message: 'Reserva efetuada com sucesso'
                 };
         }
 

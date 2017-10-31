@@ -1,10 +1,10 @@
 const validate = require('../../helpers/validate');
 
 module.exports = {
-    selecionarHistorico
+    selecionar
 };
 
-async function selecionarHistorico(params) {
+async function selecionar(params) {
     const validation = {
         search: {
             string: true,
