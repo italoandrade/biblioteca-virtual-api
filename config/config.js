@@ -6,7 +6,7 @@ const config = {
         user: process.env.PG_USER || "dougras",
         database: process.env.PG_DB || "biblioteca_virtual",
         password: process.env.PG_PASSWORD || "teste123",
-        host: process.env.PG_HOST || "52.87.115.99",
+        host: process.env.PG_HOST || "localhost",
         port: process.env.PG_PORT || 5432,
         max: 10,
         idleTimeoutMillis: 30000
