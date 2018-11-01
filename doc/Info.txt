@@ -1,0 +1,12 @@
+Biblioteca Virtual
+
+Clientes
+Livros
+Editoras
+Autores
+Publicações
+
+Livros emprestados
+Clientes inadimplentes
+Renovações de empréstimos
+Localização de um determinado livro
